@@ -6,6 +6,8 @@ This is a very easy component for beginners to understand and use, because it ac
 
 I just created this so I will be cleaning things up. I ported the intro to scalajs boilerplate as a starting point but I didn't fork because this is not going to be a boilerplate, but just this component and a demo.
 
+![logo](https://raw.githubusercontent.com/jshin47/scalajs-react-flexbox-grid/master/terribledemo.png)
+
 ## What does it do?
 
 This library allows you to create `flexboxgrid` wrappers using `ReactComponentB`'s and `Props` for each type of thing. If it is working, you can do all sorts of neat stuff with the library without needing to write a single double-quote.
