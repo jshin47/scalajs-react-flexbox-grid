@@ -1,0 +1,6 @@
+# pack-refs with: peeled fully-peeled 
+25018ca0c445df982c98da306982ad4478e0cb12 refs/remotes/origin/diode-integration
+ab293e98a79bb4b5706e65ca8a7551922b9af75d refs/remotes/origin/gh-pages
+a5a0085c9e4287058171b8ea521a9bd39146b359 refs/remotes/origin/master
+d83b84e910b13b0a9bcf17f42ee71609c66ae94d refs/remotes/origin/play
+37e8fc158f7beeb3eace3fec23bf0b0f7bf57ecc refs/remotes/origin/screenshots
