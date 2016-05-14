@@ -11,9 +11,24 @@ I just created this so I will be cleaning things up. I ported the intro to scala
 This library allows you to create `flexboxgrid` wrappers using `ReactComponentB`'s and `Props` for each type of thing. If it is working, you can do all sorts of neat stuff with the library without needing to write a single double-quote.
 
 ```
-set EclipseKeys.skipParents in ThisBuild := false
-eclipse
+        <.h3("Columns equal on LG, unequal (9+3) below LG."),
+        Row()(
+          Column(md = DeclareColumn(9), lg = DeclareColumn.WidthAuto)(renderRandomContent(50, 80)),
+          Column(md = DeclareColumn(3), lg = DeclareColumn.WidthAuto)(renderRandomContent(50, 80))
+        ),
+
+        <.h3("One thing you can do is vary the flexing by the screen size. So we will go to two-columns on XS, three on SM, and four above. Look where the Columns are laid out."),
+        Row()(
+          Column(xs = DeclareColumn.WidthOf(6), sm = DeclareColumn.WidthOf(4), md = DeclareColumn.WidthAuto)(<.div(^.backgroundColor := randomLightColorLowA)(<.h5("latest news"), renderRandomContent(50, 80))),
+          Column(xs = DeclareColumn.WidthOf(6), sm = DeclareColumn.WidthOf(4), md = DeclareColumn.WidthAuto)(<.div(^.backgroundColor := randomLightColorLowA)(<.h5("gossip"), renderRandomContent(50, 80))),
+          Column(xs = DeclareColumn.WidthOf(6), sm = DeclareColumn.WidthOf(4), md = DeclareColumn.WidthAuto)(<.div(^.backgroundColor := randomLightColorLowA)(<.h5("nightly news"), renderRandomContent(50, 80))),
+          Column(xs = DeclareColumn.WidthOf(6), sm = DeclareColumn.WidthOf(4), smOffset = ColumnOffset.OffsetOf(4), mdOffset = ColumnOffset.OffsetOf(0), md = DeclareColumn.WidthAuto)(<.div(^.backgroundColor := randomLightColorLowA)(<.h5("late nite - notice the offset on SM"), renderRandomContent(50, 80)))
+        ),
 ```
+
+## Where is it?
+
+It's in one file called `ReactFlexBoxGrid.scala` in `client`. Obviously this is not even close to publishable so if you want to use it or start from it, clone or just copy that file. See the home page for a crappy demo
 
 ## Credit/Praise for the boilerplate
 
@@ -23,8 +38,6 @@ All praise is due to [scalajs-spa-tutorial](https://github.com/ochrons/scalajs-s
 
 Actually, I take it back. A lot of praise is due to the boilerplate, but I think [Li Haoyi](www.lihaoyi.com/scala-js-games/) probably gets "all praise" if anyone does. But still, thanks for the boilerplate.
 
-# Scala IDE users
-
-If you are using Scala IDE, you need to set additional settings to get your Eclipse project exported from SBT.
+# Make react great again!
 
 
