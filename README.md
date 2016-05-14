@@ -1,35 +1,30 @@
-# Scala.js SPA-tutorial
+# scalajs-react-flexbox-grid
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ochrons/scalajs-spa-tutorial?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-[![Scala.js](https://www.scala-js.org/assets/badges/scalajs-0.6.8.svg)](https://www.scala-js.org)
+This is a port of `flexboxgrid`, a rather simplistic grid CSS library, to ScalaJS. The port is so elementary that it may not seem all that useful, but that's partially because of how well-designed the `flexboxgrid` library is.
 
-Tutorial for creating a simple (but potentially complex!) Single Page Application with
-[Scala.js](http://www.scala-js.org/) and [Play](https://www.playframework.com/).
+This is a very easy component for beginners to understand and use, because it actually involves no native JS calls (it's a CSS library, once again). So that means the whole thing is implemented by applying styles appropriately and tying them to case classes.
 
-## Purpose
+I just created this so I will be cleaning things up. I ported the intro to scalajs boilerplate as a starting point but I didn't fork because this is not going to be a boilerplate, but just this component and a demo.
 
-This project demonstrates typical design patterns and practices for developing SPAs with Scala.js with special focus on
-building a complete application. It started as a way to learn more about Scala.js and related libraries, but then I
-decided to make it more tutorial-like for the greater good :)
+## What does it do?
 
-The code covers typical aspects of building a SPA using Scala.js but it doesn't try to be an all-encompassing example
-for all the things possible with Scala.js. Before going through this tutorial, it would be helpful if you already know
-the basics of Scala.js and have read through the official [Scala.js tutorial](http://www.scala-js.org/doc/tutorial.html)
-and the great e-book [Hands-on Scala.js](http://lihaoyi.github.io/hands-on-scala-js/#Hands-onScala.js) by 
-[Li Haoyi (@lihaoyi)](https://github.com/lihaoyi).
-
-# Documentation
-
-Tutorial [documentation](https://ochrons.github.io/scalajs-spa-tutorial) is now presented as a GitBook.
-
-あなたは日本語を話せますか？Scala.js is Big in Japan, so I'm looking for help to translate the tutorial documentation into Japanese.
-Contact me on twitter (@ochrons) or via email (otto@chrons.me) if you're interested!
-
-# Scala IDE users
-
-If you are using Scala IDE, you need to set additional settings to get your Eclipse project exported from SBT.
+This library allows you to create `flexboxgrid` wrappers using `ReactComponentB`'s and `Props` for each type of thing. If it is working, you can do all sorts of neat stuff with the library without needing to write a single double-quote.
 
 ```
 set EclipseKeys.skipParents in ThisBuild := false
 eclipse
 ```
+
+## Credit/Praise for the boilerplate
+
+This is a dinky little library whose type-safety is a lie because at the end of the day, you're relying on CSS class names. But I've used a form of it for a while and found it useful, so I wrote this tonight as a way to get started contributing with something similar to something I have used.
+
+All praise is due to [scalajs-spa-tutorial](https://github.com/ochrons/scalajs-spa-tutorial) for this wonderful boilerplate. I do plan to strip most away but this is a great way to get off the ground.
+
+Actually, I take it back. A lot of praise is due to the boilerplate, but I think [Li Haoyi](www.lihaoyi.com/scala-js-games/) probably gets "all praise" if anyone does. But still, thanks for the boilerplate.
+
+# Scala IDE users
+
+If you are using Scala IDE, you need to set additional settings to get your Eclipse project exported from SBT.
+
+

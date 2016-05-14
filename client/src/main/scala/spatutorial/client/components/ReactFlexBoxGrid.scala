@@ -11,6 +11,8 @@ import japgolly.scalajs.react.vdom.prefix_<^._
 
 import scala.reflect.ClassTag
 
+import scala.language.implicitConversions
+
 @js.native
 @JSName("flexboxgrid")
 object FlexBoxGridJS extends js.Object {
@@ -37,23 +39,38 @@ object ReactFlexBoxGrid {
 
   abstract class _ScreenBreakpoint(override val toString: String) extends ScreenBreakpoint
 
-  case object XS extends _ScreenBreakpoint("xs")
-  case object SM extends _ScreenBreakpoint("sm")
-  case object MD extends _ScreenBreakpoint("md")
-  case object LG extends _ScreenBreakpoint("lg")
+  object ScreenBreakpoint {
+    case object XS extends _ScreenBreakpoint("xs")
+    case object SM extends _ScreenBreakpoint("sm")
+    case object MD extends _ScreenBreakpoint("md")
+    case object LG extends _ScreenBreakpoint("lg")
+
+    val AllAscending = Seq(XS, SM, MD, LG)
+  }
+
+
+
+
 
   abstract class ColumnPositioning(override val toString: String)
 
-  case object Start extends ColumnPositioning("start")
-  case object Center extends ColumnPositioning("center")
-  case object End extends ColumnPositioning("end")
-  case object Top extends ColumnPositioning("top")
-  case object Middle extends ColumnPositioning("middle")
-  case object Bottom extends ColumnPositioning("bottom")
-  case object Around extends ColumnPositioning("around")
-  case object Between extends ColumnPositioning("between")
-  case object First extends ColumnPositioning("first")
-  case object Last extends ColumnPositioning("last")
+  object ColumnPositioning {
+    case object Start extends ColumnPositioning("start")
+    case object Center extends ColumnPositioning("center")
+    case object End extends ColumnPositioning("end")
+    case object Top extends ColumnPositioning("top")
+    case object Middle extends ColumnPositioning("middle")
+    case object Bottom extends ColumnPositioning("bottom")
+    case object Around extends ColumnPositioning("around")
+    case object Between extends ColumnPositioning("between")
+    case object First extends ColumnPositioning("first")
+    case object Last extends ColumnPositioning("last")
+    implicit def wrapOptional(cp: ColumnPositioning): Option[ColumnPositioning] = Some(cp)
+  }
+
+  val ColPos = ColumnPositioning
+  val Bkpt = ScreenBreakpoint
+
 
   final val AutoWidth: Option[Int] = None
   case class DeclareColumn(width: Option[Int] = AutoWidth) {
@@ -63,12 +80,26 @@ object ReactFlexBoxGrid {
     }
   }
 
+  object DeclareColumn {
+    def       WidthAuto      = DeclareColumn(AutoWidth)
+    def  WidthOf(w: Int): DeclareColumn     = DeclareColumn(Some(w))
+    def    apply(w: Int): DeclareColumn     = DeclareColumn.WidthOf(w)
+    implicit def wrapOptional(declareCol: DeclareColumn): Option[DeclareColumn] = Some(declareCol)
+  }
+
   final val NoOffset: Option[Int] = None
   case class ColumnOffset(off: Option[Int] = NoOffset) {
     def manualOffset: String = off match {
       case NoOffset ⇒ ""
       case Some(offset) ⇒ s"-offset-$offset"
     }
+  }
+
+  object ColumnOffset {
+    def      DefaultNoOffset  = ColumnOffset(NoOffset)
+    def      OffsetOf(w: Int): ColumnOffset = ColumnOffset(Some(w))
+    def      apply(w: Int): ColumnOffset    = ColumnOffset(Some(w))
+    implicit def wrapOptional(offset: ColumnOffset): Option[ColumnOffset] = Some(offset)
   }
 
   implicit class MapsToScreenBreakpoints[T](hash: Map[ScreenBreakpoint, T]) {
@@ -94,6 +125,12 @@ object ReactFlexBoxGrid {
     val func: (ColumnOffset ⇒ Option[(ScreenBreakpoint) ⇒ String]) = w ⇒ Some(b ⇒ s"col-$b${w.manualOffset}")
     def toClassNames: Seq[String] = toClassNames(func)
   }
+
+  def optionsToMap[T, K](options: Seq[Option[T]], keys: Seq[K]): Map[K, T] = {
+    keys.zip(options).toMap.filter(x ⇒ x._2.isDefined).map(x ⇒ (x._1, x._2.get))
+  }
+
+  def optionsToBreakpointMap[T](options: Seq[Option[T]]): Map[ScreenBreakpoint, T] = optionsToMap(options, ScreenBreakpoint.AllAscending)
 
   class Backend[TProps <: MapsToClassNames with RendersCustomTag]($: BackendScope[TProps, Unit]) {
     def render(P: TProps, C: PropsChildren) =
@@ -139,7 +176,23 @@ object ReactFlexBoxGrid {
 
     }
 
+    object MkProps {
+
+
+    }
+
     def apply(p: Props)(ch: ReactNode*) = c[Props]("FlexBoxRow")(p, ch)
+
+    def apply(
+               xs: Option[ColumnPositioning] = None,
+               sm: Option[ColumnPositioning] = None,
+               md: Option[ColumnPositioning] = None,
+               lg: Option[ColumnPositioning] = None,
+               reverse: Boolean = false,
+               className: String = "",
+               tagName: String = "div"
+             )(ch: ReactNode*): ReactComponentU_ =
+      apply(Props(optionsToBreakpointMap(Seq(xs, sm, md, lg)), reverse, className, tagName))(ch)
 
   }
 
@@ -158,6 +211,28 @@ object ReactFlexBoxGrid {
 
     def apply(p: Props)(ch: ReactNode*) = c[Props]("FlexBoxCol")(p, ch)
 
+    def apply(
+               xs:   Option[DeclareColumn] = None,
+               sm:   Option[DeclareColumn] = None,
+               md:   Option[DeclareColumn] = None,
+               lg:   Option[DeclareColumn] = None,
+               xsOffset:   Option[ColumnOffset]  = None,
+               smOffset:   Option[ColumnOffset]  = None,
+               mdOffset:   Option[ColumnOffset]  = None,
+               lgOffset:   Option[ColumnOffset]  = None,
+               reverse:    Boolean               = false,
+               className:  String                = "",
+               tagName:    String                = "div"
+             )(
+               ch: ReactNode *
+    ): ReactComponentU_ =
+      apply(
+        Props(
+          optionsToBreakpointMap(Seq(xs, sm, md, lg)),
+          optionsToBreakpointMap(Seq(xsOffset, smOffset, mdOffset, lgOffset)),
+          reverse, className, tagName
+        )
+      )(ch)
   }
 
 

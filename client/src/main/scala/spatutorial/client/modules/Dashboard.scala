@@ -29,26 +29,7 @@ object Dashboard {
         proxy.connect(m => m)(Motd(_)),
         Chart(cp),
         // create a link to the To Do view
-        <.div(router.link(TodoLoc)("Check your todos!")),
-        Grid(Grid.Props(true))(
-          Row(Row.Props(Map(XS → Top, SM → First, MD → Last, LG → Bottom)))(
-            Column(Column.Props(Map(XS → DeclareColumn(AutoWidth), SM → DeclareColumn(Some(6)), MD → DeclareColumn(AutoWidth) )))(
-              <.div(^.backgroundColor := "#f3f3f3")("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n")
-            ),
-            Column(Column.Props(Map(XS → DeclareColumn(Some(3)), SM → DeclareColumn(Some(2)), MD → DeclareColumn(AutoWidth) )))(
-              <.div(^.backgroundColor := "#f3f3f3")("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n")
-            ),
-            Column(Column.Props(Map(XS → DeclareColumn(Some(3)), SM → DeclareColumn(Some(6)), MD → DeclareColumn(AutoWidth) )))(
-              <.div(^.backgroundColor := "#f3f3f3")("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n")
-            ),
-            Column(Column.Props(Map(XS → DeclareColumn(AutoWidth), SM → DeclareColumn(AutoWidth), MD → DeclareColumn(AutoWidth) )))(
-              <.div(^.backgroundColor := "#f3f3f3")("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n")
-            ),
-            Column(Column.Props(Map(XS → DeclareColumn(AutoWidth), SM → DeclareColumn(AutoWidth), MD → DeclareColumn(AutoWidth) )))(
-              <.div(^.backgroundColor := "#f3f3f3")("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\n")
-            )
-          )
-        )
+        <.div(router.link(TodoLoc)("Check your todos!"))
       )
     }.build
 
